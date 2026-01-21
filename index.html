@@ -330,8 +330,8 @@
             color: #9ca3af;
         }
 
-        /* Phone Feature Module */
-        .phone-feature-module {
+        /* Features Content Layout */
+        .features-content {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -341,50 +341,17 @@
             padding: 0 2rem;
         }
 
-        .phone-feature-module .module-phone {
+        .phone-slot {
             flex-shrink: 0;
-            perspective: 1000px;
-        }
-
-        .phone-feature-module .module-phone-mockup {
-            position: relative;
             width: 280px;
-            transform: rotateY(-5deg) rotateX(2deg);
-            transform-style: preserve-3d;
-            transition: transform 0.6s ease;
+            height: 580px;
         }
 
-        .phone-feature-module .module-phone-mockup:hover {
-            transform: rotateY(-2deg) rotateX(1deg) scale(1.02);
-        }
-
-        .phone-feature-module .module-phone-frame {
-            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
-            border-radius: 40px;
-            padding: 10px;
-            box-shadow:
-                0 60px 120px rgba(0, 0, 0, 0.5),
-                0 20px 50px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .phone-feature-module .module-phone-screen {
-            border-radius: 32px;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .phone-feature-module .module-phone-screen img {
-            width: 100%;
-            display: block;
-        }
-
-        .phone-feature-module .module-text {
+        .module-text {
             max-width: 480px;
         }
 
-        .phone-feature-module .module-eyebrow {
+        .module-eyebrow {
             font-size: 0.75rem;
             font-weight: 600;
             color: #3CE564;
@@ -393,7 +360,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .phone-feature-module .module-headline {
+        .module-headline {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(2rem, 4vw, 2.8rem);
             font-weight: 500;
@@ -402,20 +369,32 @@
             color: #ffffff;
         }
 
+        /* Scroll-animated phone */
+        .phone-showcase {
+            perspective: 1000px;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease 0.6s forwards;
+            position: fixed;
+            z-index: 100;
+            pointer-events: none;
+            will-change: transform, left, top;
+            transition: none;
+        }
+
+        .phone-showcase.animating {
+            transition: none;
+        }
+
         @media (max-width: 900px) {
-            .phone-feature-module {
+            .features-content {
                 flex-direction: column;
                 gap: 3rem;
                 text-align: center;
             }
 
-            .phone-feature-module .module-phone-mockup {
+            .phone-slot {
                 width: 240px;
-                transform: none;
-            }
-
-            .phone-feature-module .module-phone-mockup:hover {
-                transform: scale(1.02);
+                height: 500px;
             }
         }
 
@@ -638,59 +617,11 @@
 
     <!-- Features Section -->
     <section class="features" id="features">
-        <div class="section-header scroll-fade">
-            <h2>Don't Just Read. Interact.</h2>
-            <p class="section-description">Turn passive scrolling into active understanding. Ask questions, get context,
-                and cut through the noise.</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-comments"></i></div>
-                <h3>Conversational Search</h3>
-                <p>Ask questions like "Why is this trending?" and get instant, sourced answers.</p>
+        <div class="features-content">
+            <div class="phone-slot" id="phone-slot">
+                <!-- Phone will animate into here from hero -->
             </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
-                <h3>Instant Clarity</h3>
-                <p>Skip the clickbait. AI summarizes the facts so you get the gist in seconds.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
-                <h3>Signal, Not Noise</h3>
-                <p>A feed that learns what you value, filtering out the distractions you don't.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-circle-check"></i></div>
-                <h3>Verifiable Truth</h3>
-                <p>No hallucinations. Every summary includes direct citations to trusted primary sources.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-layer-group"></i></div>
-                <h3>The Full Picture</h3>
-                <p>Understand the "Why." One tap reveals the timeline and history behind the headline.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3>Private Intelligence</h3>
-                <p>What you read is your business. Your data and queries are encrypted and never sold.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- App Section -->
-    <section class="app-section" id="app">
-        <!-- Phone Feature Module -->
-        <div class="phone-feature-module scroll-fade">
-            <div class="module-phone">
-                <div class="module-phone-mockup">
-                    <div class="module-phone-frame">
-                        <div class="module-phone-screen">
-                            <img src="updatedhome2.png" alt="Daily Brief Feature">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="module-text">
+            <div class="module-text scroll-fade">
                 <div class="module-eyebrow">Daily Briefs</div>
                 <h3 class="module-headline">Glimpse uses AI to curate personalized news briefs tailored to your
                     interests.</h3>
@@ -734,6 +665,7 @@
     </footer>
 
     <script>
+        // Intersection observer for fade-in animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -741,22 +673,92 @@
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
-        document.querySelectorAll('.feature-card').forEach((card, i) => {
-            card.style.transitionDelay = `${i * 0.1}s`;
-            observer.observe(card);
-        });
         document.querySelectorAll('.cta-content').forEach(el => observer.observe(el));
 
+        // Nav scroll effect
         const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
 
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
             });
+        });
+
+        // Scroll-linked phone animation
+        const phone = document.querySelector('.phone-showcase');
+        const hero = document.querySelector('.hero');
+        const phoneSlot = document.getElementById('phone-slot');
+
+        let heroRect, slotRect, phoneRect;
+        let startY, endY, startX, endX, startScale, endScale;
+
+        function calculatePositions() {
+            heroRect = hero.getBoundingClientRect();
+            slotRect = phoneSlot.getBoundingClientRect();
+            phoneRect = phone.getBoundingClientRect();
+
+            // Hero phone position (centered)
+            startX = heroRect.left + heroRect.width / 2 - phoneRect.width / 2;
+            startY = heroRect.top + heroRect.height * 0.6 + window.scrollY;
+
+            // Target position in the features section (left side)
+            endX = slotRect.left + slotRect.width / 2 - phoneRect.width / 2;
+            endY = slotRect.top + window.scrollY + slotRect.height / 2 - phoneRect.height / 2;
+
+            startScale = 1;
+            endScale = 0.82;
+        }
+
+        function lerp(start, end, t) {
+            return start + (end - start) * t;
+        }
+
+        function easeOutCubic(t) {
+            return 1 - Math.pow(1 - t, 3);
+        }
+
+        function updatePhonePosition() {
+            const scrollY = window.scrollY;
+            const triggerStart = heroRect.height * 0.3;
+            const triggerEnd = heroRect.height * 1.2;
+
+            // Calculate progress (0 to 1)
+            let progress = (scrollY - triggerStart) / (triggerEnd - triggerStart);
+            progress = Math.max(0, Math.min(1, progress));
+            progress = easeOutCubic(progress);
+
+            // Interpolate position and scale
+            const x = lerp(startX, endX, progress);
+            // Lerp between absolute document positions, then convert to viewport position
+            const absoluteY = lerp(startY, endY, progress);
+            const viewportY = absoluteY - scrollY;
+            const scale = lerp(startScale, endScale, progress);
+            const rotateX = lerp(8, 2, progress);
+            const rotateY = lerp(0, -5, progress);
+
+            phone.style.left = `${x}px`;
+            phone.style.top = `${viewportY}px`;
+            phone.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+
+            // Nav scroll effect
+            nav.classList.toggle('scrolled', scrollY > 50);
+        }
+
+        // Initial setup
+        window.addEventListener('load', () => {
+            calculatePositions();
+            updatePhonePosition();
+        });
+
+        window.addEventListener('resize', () => {
+            calculatePositions();
+            updatePhonePosition();
+        });
+
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(updatePhonePosition);
         });
     </script>
 </body>

@@ -196,11 +196,39 @@
             animation: fadeInUp 1.2s ease 0.6s forwards;
         }
 
-        .hero-phones-img {
-            max-width: 900px;
+        .phone-mockup {
+            position: relative;
+            width: 340px;
+            transform: rotateX(8deg) rotateY(0deg);
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            margin: 0 auto;
+        }
+
+        .phone-mockup:hover {
+            transform: rotateX(2deg) rotateY(0deg) scale(1.02);
+        }
+
+        .phone-frame {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+            border-radius: 45px;
+            padding: 12px;
+            box-shadow:
+                0 80px 160px rgba(0, 0, 0, 0.6),
+                0 30px 60px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .phone-screen {
+            border-radius: 36px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .phone-screen img {
             width: 100%;
-            height: auto;
-            filter: drop-shadow(0 60px 120px rgba(0, 0, 0, 0.5));
+            display: block;
         }
 
         /* Features Section */
@@ -554,9 +582,9 @@
                 font-size: clamp(2rem, 10vw, 3rem);
             }
 
-            .hero-phones-img {
-                max-width: 100%;
-                padding: 0 1rem;
+            .phone-mockup {
+                width: 280px;
+                transform: rotateX(5deg);
             }
 
             .hero {
@@ -582,8 +610,8 @@
                 font-size: 1rem;
             }
 
-            .hero-phones-img {
-                filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
+            .phone-mockup {
+                width: 260px;
             }
         }
     </style>
@@ -610,7 +638,13 @@
                 chat-based interface powered by AI.</p>
         </div>
         <div class="phone-showcase">
-            <img src="hero-phone.png" alt="GLIMPSE App" class="hero-phones-img">
+            <div class="phone-mockup">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <img src="hero-phone.png" alt="GLIMPSE App">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

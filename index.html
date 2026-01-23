@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GLIMPSE - The News, Decoded</title>
+    <link rel="icon" type="image/png" href="GlimpseLogo.png">
+    <link rel="apple-touch-icon" href="GlimpseLogo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -190,38 +192,15 @@
 
         /* Phone Showcase */
         .phone-showcase {
-            perspective: 1000px;
             opacity: 0;
             animation: fadeInUp 1.2s ease 0.6s forwards;
         }
 
-        .phone-mockup {
-            position: relative;
-            width: 340px;
-            transform: rotateX(8deg) rotateY(0deg);
-            transform-style: preserve-3d;
-        }
-
-        .phone-frame {
-            background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
-            border-radius: 45px;
-            padding: 12px;
-            box-shadow:
-                0 80px 160px rgba(0, 0, 0, 0.6),
-                0 30px 60px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        .phone-screen {
-            border-radius: 36px;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .phone-screen img {
+        .hero-phones-img {
+            max-width: 900px;
             width: 100%;
-            display: block;
+            height: auto;
+            filter: drop-shadow(0 60px 120px rgba(0, 0, 0, 0.5));
         }
 
         /* Features Section */
@@ -572,12 +551,16 @@
             }
 
             h1 {
-                font-size: clamp(2.5rem, 12vw, 4rem);
+                font-size: clamp(2rem, 10vw, 3rem);
             }
 
-            .phone-mockup {
-                width: 320px;
-                transform: rotateX(5deg);
+            .hero-phones-img {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding: 5rem 1rem 3rem;
             }
 
             .features-grid {
@@ -591,12 +574,16 @@
         }
 
         @media (max-width: 480px) {
-            .phone-mockup {
-                width: 300px;
+            h1 {
+                font-size: clamp(1.75rem, 9vw, 2.5rem);
             }
 
             .hero-description {
                 font-size: 1rem;
+            }
+
+            .hero-phones-img {
+                filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
             }
         }
     </style>
@@ -623,13 +610,7 @@
                 chat-based interface powered by AI.</p>
         </div>
         <div class="phone-showcase">
-            <div class="phone-mockup">
-                <div class="phone-frame">
-                    <div class="phone-screen">
-                        <img src="hero-phone.png" alt="GLIMPSE App">
-                    </div>
-                </div>
-            </div>
+            <img src="hero-phones.png" alt="GLIMPSE App" class="hero-phones-img">
         </div>
     </section>
 

@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "XXXXXXXXXX.com.glimpse.Glimpse",
+        "appIDs": ["XXXXXXXXXX.com.glimpse.Glimpse"],
+        "components": [
+          {
+            "/": "/story/*",
+            "comment": "Story deeplinks"
+          }
+        ]
+      }
+    ]
+  }
+}
